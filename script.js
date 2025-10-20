@@ -274,3 +274,23 @@ const produtos = [
   { nome: "Headset", preco: 200, estoque: 25, vendidos: 0 },
   { nome: "Webcam HD", preco: 160, estoque: 40, vendidos: 3 },
 ];
+
+function desconto(p, v) {
+  if (v == 0) {
+    p *= 0.8;
+  } else if (v < 3) {
+    p *= 0.9
+  } 
+  return Number(p.toFixed(2)) 
+}
+
+function atualizaEstoque(prod) {
+  return prod.map(p => ({
+    nome: p.nome,
+    precoAntigo: p.preco,
+    precoNovo: desconto(p.preco, p.vendidos),
+    estoqueAtual: p.estoque - p.vendidos
+  }));
+}
+
+console.log(atualizaEstoque(produtos));
