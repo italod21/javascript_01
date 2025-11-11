@@ -267,30 +267,158 @@ if (n == 0) {
 // // uso:
 // // console.table(reajuste(funcionarios));
 
-const produtos = [
-  { nome: "Mouse Gamer", preco: 120, estoque: 50, vendidos: 5 },
-  { nome: "Teclado Mecânico", preco: 350, estoque: 30, vendidos: 0 },
-  { nome: "Monitor 27''", preco: 1300, estoque: 20, vendidos: 8 },
-  { nome: "Headset", preco: 200, estoque: 25, vendidos: 0 },
-  { nome: "Webcam HD", preco: 160, estoque: 40, vendidos: 3 },
+// const produtos = [
+//   { nome: "Mouse Gamer", preco: 120, estoque: 50, vendidos: 5 },
+//   { nome: "Teclado Mecânico", preco: 350, estoque: 30, vendidos: 0 },
+//   { nome: "Monitor 27''", preco: 1300, estoque: 20, vendidos: 8 },
+//   { nome: "Headset", preco: 200, estoque: 25, vendidos: 0 },
+//   { nome: "Webcam HD", preco: 160, estoque: 40, vendidos: 3 },
+// ];
+
+// function desconto(p, v) {
+//   if (v == 0) {
+//     p *= 0.8;
+//   } else if (v < 3) {
+//     p *= 0.9
+//   } 
+//   return Number(p.toFixed(2)) 
+// }
+
+// function atualizaEstoque(prod) {
+//   return prod.map(p => ({
+//     nome: p.nome,
+//     precoAntigo: p.preco,
+//     precoNovo: desconto(p.preco, p.vendidos),
+//     estoqueAtual: p.estoque - p.vendidos
+//   }));
+// }
+
+// console.log(atualizaEstoque(produtos));
+
+// let n1 = Number(prompt('Digite o primeiro número: '));
+// let n2 = Number(prompt('Digite o segundo número: '));
+// let op = Number(prompt(
+//   `Digite a operação desejada, sendo:
+//   1. soma
+//   2. subtração
+//   3. multiplicação
+//   4. divisão`));
+
+// function calcular(n1, n2, op) {
+//   if (isNaN(n1) || isNaN(n2) || isNaN(op)) return "Um dos dados inseridos não é número"
+//   if (n2 == 0 && op == 4) return "Não existe divisão por zero."
+//   switch (op) {
+//     case 1:
+//       return n1 + n2;
+//     case 2:
+//       return n1 - n2;
+//     case 3:
+//       return n1 * n2;
+//     case 4:
+//       if (n2 == 0 && op == 4) return "Não existe divisão por zero."
+//       else return n1 / n2;
+//     default:
+//       return "Escolha uma opção válida."
+//   }
+// }
+
+// console.log(calcular(n1, n2, op));
+
+// const num = Math.floor(Math.random() * 100) + 1;
+// console.log(n);
+
+// function adivinhar(n) {
+//     let palpite = Number(prompt("Digite seu palpite:"));
+//     if (palpite < 1 || palpite > 100 || isNaN(palpite) ) {
+//       alert("Seu palpite deve ser um NÚMERO entre 1 e 100.");
+//       return adivinhar(n);
+//     } else if (palpite == n) {
+//       alert(`Você acertou, o número é ${n}.`);
+//       return;
+//     }
+//     else if (palpite > n) {
+//       alert("O número secreto é menor que seu palpite.");
+//       return adivinhar(n);
+//     } else if (palpite < n) {
+//       alert("O número secreto é maior que seu palpite.");
+//       return adivinhar(n);
+//     }}
+
+// adivinhar(num);
+
+// const n = Math.floor(Math.random() * 100) + 1;
+// console.log(n);
+
+// function adivinhar(n) {
+
+//   let tent = 0;
+//   let chutes = [];
+
+//   while (true) {
+
+//     let palpite = Number(prompt("Digite um palpite:"));
+
+//     if (isNaN(palpite)) {
+//       alert("Seu palpite não é um número.");
+//       continue;
+//     }
+
+//     if (palpite < 1 || palpite > 100) {
+//       alert("Seu palpite deve estar entre 1 e 100.");
+//       continue;
+//     }
+
+//     tent++;
+//     chutes.push(palpite);
+
+//     if (palpite == n) {
+//       alert(`Você acertou na sua tentativa ${tent}, o número secreto é ${n}. As suas tentativas foram: ${chutes.join(", ")}.`);
+//       break;
+//     } else if (palpite < n) {
+//       alert(`O número secreto é maior que ${palpite}.`);
+//     } else {
+//       alert(`O número secreto é menor que ${palpite}.`)
+//     }
+
+//   }
+// }
+
+// adivinhar(n);
+
+const boletos = [
+  { id: 101, cliente: "ACME", valor: 1200.00, status: "pago",   diasAtraso: 5 },
+  { id: 102, cliente: "Beta", valor:  800.00, status: "aberto", diasAtraso: 0 },
+  { id: 103, cliente: "Zeta", valor:  950.00, status: "aberto", diasAtraso: 20 },
+  { id: 104, cliente: "Gama", valor: 1500.00, status: "pago",   diasAtraso: 0 },
+  { id: 105, cliente: "Yupi", valor:  600.00, status: "pago",   diasAtraso: 7 }
 ];
 
-function desconto(p, v) {
-  if (v == 0) {
-    p *= 0.8;
-  } else if (v < 3) {
-    p *= 0.9
-  } 
-  return Number(p.toFixed(2)) 
+function resumo(info) {
+
+  const taxa = 0.00033;
+
+  const totais = info.reduce((acum, item) => {
+    if (item.status === "pago") 
+      acum["totalRecebido"] = (acum["totalRecebido"] || 0) + item.valor; 
+    if (item.status === "aberto") 
+      acum["totalPendente"] = (acum["totalPendente"] || 0) + item.valor; 
+    if (item.diasAtraso > 0) 
+      acum["totalJuros"] = (acum["totalJuros"] || 0) + Number((item.valor * item.diasAtraso * taxa).toFixed(2)); 
+    return acum;
+  }, { totalRecebido: 0, totalPendente: 0, totalJuros: 0 });
+
+  const detalhes = info
+  .filter(vetor => vetor.diasAtraso > 0)
+  .map(v => ({
+    id: v.id,
+    cliente: v.cliente,
+    valor: Number(v.valor),
+    diasAtraso: v.diasAtraso,
+    juros: Number((v.valor * v.diasAtraso * taxa).toFixed(2))
+  }))
+  .sort((a, b) => b.diasAtraso - a.diasAtraso);
+
+  return { totais, detalhes };
 }
 
-function atualizaEstoque(prod) {
-  return prod.map(p => ({
-    nome: p.nome,
-    precoAntigo: p.preco,
-    precoNovo: desconto(p.preco, p.vendidos),
-    estoqueAtual: p.estoque - p.vendidos
-  }));
-}
-
-console.log(atualizaEstoque(produtos));
+console.log(resumo(boletos));
