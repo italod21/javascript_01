@@ -1,5 +1,5 @@
-// var str = 'Italo Duarte';
-// var num = 34;
+var str = 'Italo Duarte';
+var num = 34;
 // var bol = true;
 // var nul = null;
 // var undef;
