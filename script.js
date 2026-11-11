@@ -1,4 +1,4 @@
-var str = 'Italo Duarte';
+var str = 'PAULO ITALO DUARTE';
 var num = 34;
 // var bol = true;
 // var nul = null;
